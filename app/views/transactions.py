@@ -18,13 +18,15 @@ class TransactionForm(forms.ModelForm):
     cheque_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     account_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     routing_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    date_of_issue = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control'}))
+    date_of_issue = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}))
     amount = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     transaction_fees = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
 
 def show(request, pk, template_name='transactions/show.html'):
     transaction = get_object_or_404(Transaction, pk=pk)
     return render(request, template_name, {'object': transaction})
+
 
 def create(request, template_name='transactions/form.html'):
     form = TransactionForm(request.POST or None)
