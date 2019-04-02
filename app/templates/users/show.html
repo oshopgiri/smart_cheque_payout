@@ -9,9 +9,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="pill" href="#profile">Profile</a>
                 </li>
-                {% comment %}<li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="pill" href="#documents">Documents</a>
-                </li>{% endcomment %}
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="pill" href="#transactions">Transactions</a>
                 </li>
@@ -85,6 +85,18 @@
                 </div>
 
                 <div class="tab-pane container fade" id="documents">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <a class="btn btn-info float-right" data-toggle="modal"
+                               data-target="#new-document-modal">
+                                New Document
+                            </a>
+
+                            <div id="new-document-modal-container"></div>
+                        </div>
+                    </div>
+
+                    {% include 'documents/_list.html' with documents=object.document_set.all %}
                 </div>
 
                 <div class="tab-pane container fade" id="transactions">
@@ -108,6 +120,7 @@
     <script>
         $(document).ready(function () {
             $('#new-transaction-modal-container').load('/transactions/new?user_id={{ object.id }}');
+            $('#new-document-modal-container').load('/documents/new?user_id={{ object.id }}');
         });
     </script>
 {% endblock %}

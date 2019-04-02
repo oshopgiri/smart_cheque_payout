@@ -93,3 +93,7 @@ db.sqlite3
 
 # PyCharm stuff
 .idea/
+
+# Uploaded files
+media/*
+!media/.keep

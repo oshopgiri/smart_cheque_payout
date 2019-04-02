@@ -2,6 +2,7 @@ from django.urls import path
 
 import app.views.users as user_views
 import app.views.transactions as transaction_views
+import app.views.documents as document_views
 
 urlpatterns = [
     # User paths
@@ -18,4 +19,7 @@ urlpatterns = [
     # path('transactions/edit/<int:pk>', transaction_views.update, name='transaction_edit'),
     # path('transactions/delete/<int:pk>', transaction_views.destroy, name='transaction_delete'),
     path('transactions/today', transaction_views.today, name='transaction_today'),
+
+    # Document paths
+    path('documents/new', document_views.create, name='document_new'),
 ]

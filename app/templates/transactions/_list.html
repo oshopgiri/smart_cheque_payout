@@ -34,14 +34,14 @@
 <script>
     $(document).ready(function () {
         $('#customer-transaction-list').DataTable();
-    });
 
-    $(document).on('click', '#show-transaction-details', function () {
-        let transactionId = $(this).data('transaction-id');
-        let container = $('#transaction-details-modal-container');
+        $(document).on('click', '#show-transaction-details', function () {
+            let transactionId = $(this).data('transaction-id');
+            let container = $('#transaction-details-modal-container');
 
-        container.load('/transactions/view/' + transactionId, '', function () {
-            container.find('#transaction-details-modal').modal('show');
+            container.load('/transactions/view/' + transactionId, '', function () {
+                container.find('#transaction-details-modal').modal('show');
+            });
         });
     });
 </script>

@@ -1,0 +1,30 @@
+<table class="table" id="customer-transaction-list">
+    <thead>
+    <tr>
+        <th>Dame</th>
+        <th>Attachment</th>
+        <th>Created At</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for document in documents %}
+        <tr>
+            <td>{{ document.name }}</td>
+            <td>
+                <a href="{{ document.attachment.url }}" download>
+                    {{ document.attachment_name }}
+                </a>
+            </td>
+            <td>{{ document.created_at }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div id="transaction-details-modal-container"></div>
+
+<script>
+    $(document).ready(function () {
+        $('#customer-transaction-list').DataTable();
+    });
+</script>
