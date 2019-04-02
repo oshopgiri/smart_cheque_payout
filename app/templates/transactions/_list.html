@@ -1,0 +1,47 @@
+<table class="table" id="customer-transaction-list">
+    <thead>
+    <tr>
+        <th>Cheque Maker</th>
+        <th>Cheque Type</th>
+        <th>Cheque Number</th>
+        <th>Date of Issue</th>
+        <th>Amount</th>
+        <th>Created At</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.cheque_maker }}</td>
+            <td>{{ transaction.cheque_type }}</td>
+            <td>{{ transaction.cheque_number }}</td>
+            <td>{{ transaction.date_of_issue }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.created_at }}</td>
+            <td>
+                <a href="#" id="show-transaction-details" data-transaction-id="{{ transaction.id }}">
+                    <i class="far fa-eye"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div id="transaction-details-modal-container"></div>
+
+<script>
+    $(document).ready(function () {
+        $('#customer-transaction-list').DataTable();
+    });
+
+    $(document).on('click', '#show-transaction-details', function () {
+        let transactionId = $(this).data('transaction-id');
+        let container = $('#transaction-details-modal-container');
+
+        container.load('/transactions/view/' + transactionId, '', function () {
+            container.find('#transaction-details-modal').modal('show');
+        });
+    });
+</script>

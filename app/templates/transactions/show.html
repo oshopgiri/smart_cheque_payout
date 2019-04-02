@@ -1,0 +1,86 @@
+<div class="modal" tabindex="-1" role="dialog" id="transaction-details-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Transaction Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label><label for="id_cheque_maker">Cheque maker:</label></label>
+                            <input type="text" name="cheque_maker" class="form-control" disabled id="id_cheque_maker"
+                                   value="{{ object.cheque_maker }}">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label><label for="id_cheque_type">Cheque type:</label></label>
+                            <input type="text" name="cheque_type" class="form-control" disabled id="id_cheque_type"
+                                   value="{{ object.cheque_type }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><label for="id_cheque_number">Cheque number:</label></label>
+                    <input type="text" name="cheque_number" class="form-control" disabled id="id_cheque_number"
+                           value="{{ object.cheque_number }}">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label><label for="id_account_number">Account number:</label></label>
+                            <input type="text" name="account_number" class="form-control" disabled
+                                   id="id_account_number"
+                                   value="{{ object.account_number }}">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label><label for="id_routing_number">Routing number:</label></label>
+                            <input type="text" name="routing_number" class="form-control" disabled
+                                   id="id_routing_number"
+                                   value="{{ object.routing_number }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><label for="id_date_of_issue">Date of issue:</label></label>
+                    <input type="text" name="date_of_issue" class="form-control" disabled id="id_date_of_issue"
+                           value="{{ object.date_of_issue }}">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label><label for="id_amount">Amount:</label></label>
+                            <input type="number" name="amount" class="form-control" step="any" disabled id="id_amount"
+                                   value="{{ object.amount }}">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label><label for="id_transaction_fees">Transaction fees:</label></label>
+                            <input type="number" name="transaction_fees" class="form-control" step="any" disabled
+                                   id="id_transaction_fees" value="{{ object.transaction_fees }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

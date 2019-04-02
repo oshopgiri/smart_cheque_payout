@@ -1,0 +1,7 @@
+# Virtual ENV files
+.venv/
+
+# PyCharm stuff
+.idea/
+
+*.sqlite3

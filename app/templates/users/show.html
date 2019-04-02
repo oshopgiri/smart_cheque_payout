@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ object.name }}'s Details</h1>
+
+    <div class="row">
+        <div class="col-2">
+            <ul class="nav flex-column nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#profile">Profile</a>
+                </li>
+                {% comment %}<li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#documents">Documents</a>
+                </li>{% endcomment %}
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#transactions">Transactions</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-10">
+            <div class="tab-content">
+                <div class="tab-pane container active" id="profile">
+                    <div class="form-group">
+                        <label for="id_name">Name</label>
+                        <input type="text" class="form-control" id="id_name" name="name" value="{{ object.name }}"
+                               disabled>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="id_name">Email</label>
+                                <input type="email" class="form-control" id="id_email" name="email"
+                                       value="{{ object.email }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="id_contact_number">Contact Number</label>
+                                <input type="text" class="form-control" id="id_contact_number" name="contact_number"
+                                       value="{{ object.contact_number }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_date_of_birth">Date of Birth</label>
+                        <input type="text" class="form-control" id="id_date_of_birth" name="date_of_birth"
+                               value="{{ object.date_of_birth }}" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_address">Address</label>
+                        <textarea class="form-control" id="id_address" name="address" rows="3"
+                                  disabled>{{ object.address }}</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="id_city">City</label>
+                                <input type="text" class="form-control" id="id_city" name="city"
+                                       value="{{ object.city }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="id_state">State</label>
+                                <input type="text" class="form-control" id="id_state" name="state"
+                                       value="{{ object.state }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="id_zip">ZIP</label>
+                                <input type="number" class="form-control" id="id_zip" name="zip"
+                                       value="{{ object.zip }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane container fade" id="documents">
+                </div>
+
+                <div class="tab-pane container fade" id="transactions">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <a class="btn btn-info float-right" data-toggle="modal"
+                               data-target="#new-transaction-modal">
+                                New Transaction
+                            </a>
+
+                            <div id="new-transaction-modal-container"></div>
+                        </div>
+                    </div>
+
+                    {% include 'transactions/_list.html' with transactions=object.transaction_set.all %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#new-transaction-modal-container').load('/transactions/new?user_id={{ object.id }}');
+        });
+    </script>
+{% endblock %}
