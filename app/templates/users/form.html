@@ -3,7 +3,7 @@
 {% block content %}
     {% include 'shared/_page_title.html' with title='Customer Information' %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% for field in form.visible_fields %}
