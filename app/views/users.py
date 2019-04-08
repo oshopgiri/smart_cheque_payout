@@ -7,8 +7,9 @@ from app.models import User
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['name', 'email', 'contact_number', 'date_of_birth', 'address', 'state', 'city', 'zip']
+        fields = ['avatar', 'name', 'email', 'contact_number', 'date_of_birth', 'address', 'state', 'city', 'zip']
 
+    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control', 'accept': ".jpg,.jpeg,.png"}))
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     contact_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -31,7 +32,7 @@ def show(request, pk, template_name='users/show.html'):
 
 
 def create(request, template_name='users/form.html'):
-    form = UserForm(request.POST or None)
+    form = UserForm(request.POST or None, request.FILES)
     if form.is_valid():
         user = form.save()
         return redirect('user_view', pk=user.id)
@@ -40,7 +41,7 @@ def create(request, template_name='users/form.html'):
 
 def update(request, pk, template_name='users/form.html'):
     user = get_object_or_404(User, pk=pk)
-    form = UserForm(request.POST or None, instance=user)
+    form = UserForm(request.POST or None, request.FILES, instance=user)
     if form.is_valid():
         form.save()
         return redirect('user_view', pk=pk)
