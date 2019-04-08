@@ -41,7 +41,7 @@ def create(request, template_name='users/form.html'):
 
 def update(request, pk, template_name='users/form.html'):
     user = get_object_or_404(User, pk=pk)
-    form = UserForm(request.POST or None, request.FILES, instance=user)
+    form = UserForm(request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form.save()
         return redirect('user_view', pk=pk)

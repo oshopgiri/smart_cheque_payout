@@ -1,24 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% include 'shared/_page_title.html' with title=object.name|add:"'s Details" %}
+    <div class="row justify-content-md-center mt-3">
+        <div class="col-2">
+            <img src="{{ object.avatar.url }}" alt="{{ object.name }}"
+                 class="img-thumbnail rounded customer-profile-image">
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-10">
+                    {% include 'shared/_page_title.html' with title=object.name|add:"'s Profile" %}
+                </div>
+                <div class="col-2">
+                    <a href="{% url "user_edit" object.id %}" class="btn btn-info mt-3 float-right">
+                        <i class="fas fa-edit"></i>
+                        Edit
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link align-middle active" data-toggle="pill" href="#profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#documents">Documents</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#transactions">Transactions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
 
     <div class="row">
-        <div class="col-2">
-            <ul class="nav flex-column nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#profile">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#documents">Documents</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#transactions">Transactions</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="col-10">
+        <div class="col-12">
             <div class="tab-content">
                 <div class="tab-pane container active" id="profile">
                     <div class="form-group">
@@ -87,7 +109,7 @@
                 <div class="tab-pane container fade" id="documents">
                     <div class="row mb-5">
                         <div class="col-md-12">
-                            <a class="btn btn-info float-right" data-toggle="modal"
+                            <a href="#" class="btn btn-info float-right" data-toggle="modal"
                                data-target="#new-document-modal">
                                 New Document
                             </a>
@@ -102,7 +124,7 @@
                 <div class="tab-pane container fade" id="transactions">
                     <div class="row mb-5">
                         <div class="col-md-12">
-                            <a class="btn btn-info float-right" data-toggle="modal"
+                            <a href="#" class="btn btn-info float-right" data-toggle="modal"
                                data-target="#new-transaction-modal">
                                 New Transaction
                             </a>

@@ -97,3 +97,7 @@ db.sqlite3
 # Uploaded files
 media/*
 !media/.keep
+
+# Static files
+static/*
+!static/.keep
