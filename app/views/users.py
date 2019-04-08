@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django import forms
 
+import subprocess
+
 from app.models import User
 
 
@@ -54,3 +56,8 @@ def destroy(request, pk, template_name='users/confirm_delete.html'):
         user.delete()
         return redirect('user_list')
     return render(request, template_name, {'object': user})
+
+
+def detect(request, template_name='users/index.html'):
+    subprocess.call(["python", "detect.py"])
+    return redirect('user_list')

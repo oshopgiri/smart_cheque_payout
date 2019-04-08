@@ -12,6 +12,7 @@ urlpatterns = [
     path('users/new', user_views.create, name='user_new'),
     path('users/edit/<int:pk>', user_views.update, name='user_edit'),
     path('users/delete/<int:pk>', user_views.destroy, name='user_delete'),
+    path('users/detect', user_views.detect, name='user_detect'),
 
     # Transaction paths
     path('transactions/view/<int:pk>', transaction_views.show, name='transaction_view'),
