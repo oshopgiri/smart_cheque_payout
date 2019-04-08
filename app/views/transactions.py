@@ -62,6 +62,29 @@ def today(request, template_name='transactions/index.html'):
     return render(request, template_name, {'objects': transactions})
 
 
+FILTERS = ['account_number', 'routing_number']
+
+
+class TransactionSearchForm(forms.Form):
+    for filter in FILTERS:
+        exec("%s = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}))" % filter)
+
+
+def search(request, template_name='transactions/search.html'):
+    form = TransactionSearchForm(request.POST or None)
+    if form.is_valid():
+        params = form.cleaned_data
+        transactions = Transaction.objects
+        for filter_key in FILTERS:
+            filter_value = params.get(filter_key)
+            if filter_value: transactions = eval("transactions.filter(%s='%s')" % (filter_key, filter_value))
+        transactions = transactions.all()
+    else:
+        transactions = Transaction.objects.all()
+
+    return render(request, template_name, {'form': form, 'objects': transactions})
+
+
 def get_redirect_path(user_id):
     if user_id:
         return '/users/view/%s' % user_id

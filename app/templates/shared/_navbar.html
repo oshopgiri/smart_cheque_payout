@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'user_list' %}">Smart Cheque Payout</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_list' %}">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_new' %}">
+                    <i class="fas fa-user-plus"></i>
+                    Add Customer
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="transaction-dropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-money-check-alt"></i>
+                    Transactions
+                </a>
+                <div class="dropdown-menu" aria-labelledby="transaction-dropdown">
+                    <a class="dropdown-item" href="{% url 'transaction_today' %}">
+                        <i class="fas fa-calendar-day"></i>
+                        Today's
+                    </a>
+                    <a class="dropdown-item" href="{% url 'transaction_search' %}">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

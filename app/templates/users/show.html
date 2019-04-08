@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{ object.name }}'s Details</h1>
+    {% include 'shared/_page_title.html' with title=object.name|add:"'s Details" %}
 
     <div class="row">
         <div class="col-2">

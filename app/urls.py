@@ -19,6 +19,7 @@ urlpatterns = [
     # path('transactions/edit/<int:pk>', transaction_views.update, name='transaction_edit'),
     # path('transactions/delete/<int:pk>', transaction_views.destroy, name='transaction_delete'),
     path('transactions/today', transaction_views.today, name='transaction_today'),
+    path('transactions/search', transaction_views.search, name='transaction_search'),
 
     # Document paths
     path('documents/new', document_views.create, name='document_new'),

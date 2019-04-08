@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'shared/_page_title.html' with title='Search Transactions' %}
+
+    <form action="{% url 'transaction_search' %}" method="post" class="form-inline float-right">
+        {% csrf_token %}
+
+        {% for field in form.visible_fields %}
+            <div class="form-group mr-2">
+                <label>{{ field.label_tag }}&nbsp;</label>
+                {{ field }}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+    </form>
+
+    {% include 'transactions/_list.html' with transactions=objects %}
+{% endblock %}

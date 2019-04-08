@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Dashboard</h1>
+    {% include 'shared/_page_title.html' with title='Dashboard' %}
 
     <table class="table" id="customer-list">
         <thead>
