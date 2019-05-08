@@ -67,6 +67,9 @@ while True:
     if face_locations:
         webbrowser.open('http://localhost:8000/users/view/{0}'.format(face_names[0]))
         break
+    else:
+        webbrowser.open('http://localhost:8000/users/new')
+        break
 
 # Release handle to the webcam
 video_capture.release()
