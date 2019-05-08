@@ -64,7 +64,7 @@ while True:
 
     process_this_frame = not process_this_frame
 
-    if face_locations:
+    if face_names[0] != 'Unknown':
         webbrowser.open('http://localhost:8000/users/view/{0}'.format(face_names[0]))
         break
     else:
