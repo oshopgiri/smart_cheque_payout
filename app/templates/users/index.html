@@ -1,40 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% include 'shared/_page_title.html' with title='Dashboard' %}
+	{% include 'shared/_page_title.html' with title='Dashboard' %}
 
-    <table class="table" id="customer-list">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Contact Number</th>
-            <th>Date of Birth</th>
-            <th>Address</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for user in object_list %}
-            <tr>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.contact_number }}</td>
-                <td>{{ user.date_of_birth }}</td>
-                <td>{{ user.address }}, {{ user.city }}, {{ user.state }} {{ user.zip }}</td>
-                <td>
-                    <a href="{% url "user_view" user.id %}"><i class="far fa-eye"></i></a>
-                    <a href="{% url "user_edit" user.id %}"><i class="fas fa-edit"></i></a>
-                    <a href="{% url "user_delete" user.id %}"><i class="far fa-trash-alt"></i></a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table" id="customer-list">
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Contact Number</th>
+			<th>Date of Birth</th>
+			<th>Address</th>
+			<th>Actions</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for user in object_list %}
+			<tr>
+				<td>{{ user.name }}</td>
+				<td>{{ user.email }}</td>
+				<td>{{ user.contact_number }}</td>
+				<td>{{ user.date_of_birth }}</td>
+				<td>{{ user.address }}, {{ user.city }}, {{ user.state }} {{ user.zip }}</td>
+				<td>
+					<a href="{% url "user_view" user.id %}"><i class="far fa-eye"></i></a>
+					<a href="{% url "user_edit" user.id %}"><i class="fas fa-edit"></i></a>
+					<a href="{% url "user_delete" user.id %}"><i class="far fa-trash-alt"></i></a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
 
-    <script>
-        $(document).ready(function () {
-            $('#customer-list').DataTable();
-        });
-    </script>
+	<script>
+		$(document).ready(function () {
+			$('#customer-list').DataTable();
+		});
+	</script>
 {% endblock %}
