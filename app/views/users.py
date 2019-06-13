@@ -16,7 +16,7 @@ class UserForm(forms.ModelForm):
 
 	avatar = forms.ImageField(required=False,
 	                          widget=forms.FileInput(attrs={'class': 'form-control', 'accept': ".jpg,.jpeg,.png"}))
-	avatar_base64 = forms.CharField(widget=forms.HiddenInput())
+	avatar_base64 = forms.CharField(required=False, widget=forms.HiddenInput())
 	name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 	email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
 	contact_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -44,9 +44,13 @@ def create(request, template_name='users/form.html'):
 	if form.is_valid():
 		user = form.save(commit=False)
 		if not user.avatar:
-			format, image = form.data['avatar_base64'].split(';base64,')
-			extension = format.split('/')[-1]
-			user.avatar = ContentFile(base64.b64decode(image), name='temp.' + extension)
+			if form.data['avatar_base64']:
+				format, image = form.data['avatar_base64'].split(';base64,')
+				extension = format.split('/')[-1]
+				user.avatar = ContentFile(base64.b64decode(image), name='temp.' + extension)
+			else:
+				form.add_error('avatar', 'This field is required.')
+				return render(request, template_name, {'form': form})
 		user.save()
 		return redirect('user_view', pk=user.id)
 
@@ -57,7 +61,12 @@ def update(request, pk, template_name='users/form.html'):
 	user = get_object_or_404(User, pk=pk)
 	form = UserForm(request.POST or None, request.FILES or None, instance=user)
 	if form.is_valid():
-		form.save()
+		user = form.save(commit=False)
+		if form.data['avatar_base64']:
+			format, image = form.data['avatar_base64'].split(';base64,')
+			extension = format.split('/')[-1]
+			user.avatar = ContentFile(base64.b64decode(image), name='temp.' + extension)
+		user.save()
 		return redirect('user_view', pk=pk)
 	return render(request, template_name, {'form': form})
 
