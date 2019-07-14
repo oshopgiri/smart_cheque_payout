@@ -1,6 +1,8 @@
 from django import forms
 from django.core.files.base import ContentFile
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 
 import base64
 import subprocess
@@ -79,6 +81,11 @@ def destroy(request, pk, template_name='users/confirm_delete.html'):
 	return render(request, template_name, {'object': user})
 
 
-def detect(request, template_name='users/index.html'):
-	subprocess.call(["python", "detect.py"])
-	return redirect('user_list')
+def detect(request, template_name=''):
+	result = subprocess.run(['python', 'detect.py'], stdout=subprocess.PIPE)
+	pk = result.stdout.decode('utf-8')
+	response = { 'success': False }
+	if pk:
+		response = { 'success': True, 'profile_url': reverse('user_view', args=[pk]) }
+
+	return JsonResponse(response)

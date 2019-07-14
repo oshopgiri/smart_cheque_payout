@@ -33,7 +33,7 @@
                         Add Customer
                     </a>
 
-                    <a class="dropdown-item" href="{% url 'user_detect' %}">
+                    <a class="dropdown-item" id="detect-customer" href="#">
                         <i class="fas fa-camera"></i>
                         Detect
                     </a>
@@ -61,3 +61,31 @@
         </ul>
     </div>
 </nav>
+
+<div class="container-fluid mt-2">
+	<div class="alert alert-danger d-none" id="alert-container">
+
+	</div>
+</div>
+
+<script>
+	$(document).on('click', '#detect-customer', function () {
+		$.LoadingOverlay('show');
+		alertContainer = $('#alert-container');
+		alertContainer.empty().addClass('d-none');
+
+		$.get("{% url 'user_detect' %}", function (data) {
+			if(data.success) {
+				window.location.href = data.profile_url;
+			} else {
+				alertContainer.append(`
+					Unable to find the customer in the database.
+					<a href="{% url 'user_list' %}">Click here</a> to search for the customer manually or
+					<a href="{% url 'user_new' %}">click here</a> to register a new customer.
+				`);
+				alertContainer.removeClass('d-none');
+				$.LoadingOverlay('hide');
+			}
+		}, 'json')
+	})
+</script>
